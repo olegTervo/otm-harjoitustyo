@@ -5,6 +5,6 @@ jotain teksti lukemaan
 
 Tässä on teksti, jossa on **bold** ja *italic* sanat. Lue sitä **HYVIN**.
 
-[gitlog.txt]( otm-harjoitustyo/laskarit/viikko1/gitlog.txt )
+[gitlog.txt]( https://github.com/olegTervo/otm-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt )
 
-[kommentorivi.txt]( otm-harjoitustyo/laskarit/viikko1/kommentorivi.txt )
+[kommentorivi.txt]( https://github.com/olegTervo/otm-harjoitustyo/blob/master/laskarit/viikko1/kommentorivi.txt )
