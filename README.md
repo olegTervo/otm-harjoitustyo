@@ -12,4 +12,4 @@ Tässä on teksti, jossa on **bold** ja *italic* sanat. Lue sitä **HYVIN**.
 
 **Dokumentaatio**
 
-[Vaatimusmaarittely] ( otm-harjoitustyo/dokumentaatio/vaatimusmaarittely.md )
+[Vaatimusmaarittely]( otm-harjoitustyo/dokumentaatio/vaatimusmaarittely.md )
