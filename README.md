@@ -13,3 +13,5 @@ Tässä on teksti, jossa on **bold** ja *italic* sanat. Lue sitä **HYVIN**.
 ## Dokumentaatio
 
 [Vaatimusmaarittely]( https://github.com/olegTervo/otm-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md )
+
+[Työaikakirjanpito]( https://github.com/olegTervo/otm-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md )
