@@ -10,6 +10,6 @@ Tässä on teksti, jossa on **bold** ja *italic* sanat. Lue sitä **HYVIN**.
 [kommentorivi.txt]( https://github.com/olegTervo/otm-harjoitustyo/blob/master/laskarit/viikko1/kommentorivi.txt )
 
 
-**Dokumentaatio**
+## Dokumentaatio
 
-[Vaatimusmaarittely]( https://github.com/olegTervo/otm-harjoitustyo/dokumentaatio/vaatimusmaarittely.md )
+[Vaatimusmaarittely]( https://github.com/olegTervo/otm-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md )
