@@ -1,16 +1,16 @@
-	Vaatimusmäärittely
+# Vaatimusmäärittely
 
 
-Soveluksen tarkoitus
+## Soveluksen tarkoitus
 
 Sovellus on järjestelmä, joka hoitaa ajanvarauksia. Siellä voi rikestroida, varaa itselle aikaa ja tarkistaa, jos aika on vapaa.
 
-Käyttäjät
+## Käyttäjät
 
 Sovelluksessa on yksi käyttäjärooli tässä vaiheessa.
 
 
-	Tarjoama toiminnallisuus
+# Tarjoama toiminnallisuus
 
 - Alussa käyttäja voi luoda uuden käyttäjätunnuksen tai kirjautua järjestelmään omalla tunnuksella.
 	Käyttäjätunnus on uniikki.
@@ -22,7 +22,7 @@ Sovelluksessa on yksi käyttäjärooli tässä vaiheessa.
 - Lopussa hän voi kirjautua ulos.
 
 
-	Jatkoideoita
+# Jatkoideoita
 
 - Lisää enemmän kuin yksi lista, että esimerkiksi voi varaa aikaa pesukoneen, saunaan tai kuntosaliin erikseen
 - Lisää pääkäyttäja
