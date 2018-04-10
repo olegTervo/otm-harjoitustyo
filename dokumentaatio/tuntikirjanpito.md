@@ -4,3 +4,4 @@
 | :----:|:-----| :-----|
 | 26.3  | 2    | dokumentaatio |
 | 09.4  | 5    | laskarit viikko3|
+| 10.4  | 3    | ajanvarauslista, kayttaja ja testit|
