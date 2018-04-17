@@ -51,4 +51,13 @@ public class TimeAppTest {
         list.varaa(user, 6);
         assertTrue(list.varauksia(user).get(0) == 6);
     }
+    
+    @Test
+    public void poistaminenTest(){
+        list.varaa(user, 1);
+        list.varaa(user, 5);
+        list.poistaVaraus(user, 5);
+        assertEquals(list.varauksia(user).size(), 1);
+        assertTrue(list.varauksia(user).get(0) == 1);
+    }
 }

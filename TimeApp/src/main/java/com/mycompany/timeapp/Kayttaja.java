@@ -16,16 +16,16 @@ public class Kayttaja {
     private String nimi;
     private List<Integer> varaukset;
     
-    public Kayttaja(String nimi){
+    public Kayttaja(String nimi) {
         this.nimi = nimi;
         this.varaukset = new ArrayList();
     }
     
-    public String getNimi(){
+    public String getNimi() {
         return this.nimi;
     }
     
-    public int hashCode(){
+    public int hashCode() {
         return this.nimi.hashCode();
     }
 }

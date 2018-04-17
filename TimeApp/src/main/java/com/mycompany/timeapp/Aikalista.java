@@ -16,24 +16,24 @@ import java.util.Map;
 public class Aikalista {
     private Map<Kayttaja, ArrayList<Integer>> list;
     
-    public Aikalista(){
+    public Aikalista() {
         this.list = new HashMap();
     }
     
-    public void varaa(Kayttaja k, int time){
+    public void varaa(Kayttaja k, int time) {
         this.list.putIfAbsent(k, new ArrayList());
         this.list.get(k).add(time);
     }
     
-    public void poistaVaraus(Kayttaja k, int time){
-        if(this.list.containsKey(k)){
-            if(this.list.get(k).contains(time)){
-                this.list.get(k).remove(time);
+    public void poistaVaraus(Kayttaja k, int time) {
+        if (this.list.containsKey(k)) {
+            if (this.list.get(k).contains(time)) {
+                this.list.get(k).remove(this.list.get(k).indexOf(time));
             }
         }
     }
     
-    public ArrayList<Integer> varauksia(Kayttaja k){
+    public ArrayList<Integer> varauksia(Kayttaja k) {
         return this.list.get(k);
     }
 }
