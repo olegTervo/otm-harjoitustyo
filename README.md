@@ -8,7 +8,7 @@ Sovellus on järjestelmä, joka hoitaa ajanvarauksia. Siellä voi rikestroida, v
 
 [Työaikakirjanpito]( https://github.com/olegTervo/otm-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md )
 
-[Arkkitehtuurikuvaus] ( https://github.com/olegTervo/otm-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md )
+[Arkkitehtuurikuvaus]( https://github.com/olegTervo/otm-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md )
 
 ## Testaus
 
