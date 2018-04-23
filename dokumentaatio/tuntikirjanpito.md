@@ -6,3 +6,4 @@
 | 10.4  | 3    | ajanvarauslista, kayttaja ja testit|
 | 17.4  | 5    | UI|
 | 17.4  | 3    | testit, virheet, checkstyle |
+| 23.4  | 5    | UI logikka, ulkonäkö |
