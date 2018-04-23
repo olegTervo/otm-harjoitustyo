@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 
-import com.mycompany.timeapp.Aikalista;
-import com.mycompany.timeapp.Kayttaja;
+import timeapp.domain.Aikalista;
+import timeapp.domain.Kayttaja;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

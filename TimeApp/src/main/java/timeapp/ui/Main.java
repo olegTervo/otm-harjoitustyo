@@ -3,22 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.timeapp;
+package timeapp.ui;
 
-import com.mycompany.timeapp.Kayttaja;
+import timeapp.domain.Kayttaja;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import static javafx.scene.paint.Color.BLACK;
+import static javafx.scene.paint.Color.RED;
 import javafx.stage.Stage;
+import timeapp.domain.Aikalista;
 
 /**
  *
@@ -26,21 +33,99 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     
+    private Stage primary;
+    
     private Scene loginScene;
     private Scene createUser;
     private Scene logged;
     private Scene welldone;
     
-    private Stage wdstage;
+    private ScrollPane finaltime;
     private Kayttaja user;
+    private Aikalista list = new Aikalista(user);
+    
+    public void renew(){
+        VBox time1 = times();
+        time1.setSpacing(2);
+        Button logout = new Button("Log out");
+        time1.getChildren().add(logout);
+        finaltime = new ScrollPane(time1);    
+        
+        logged = new Scene(finaltime, 200, 300);
+        primary.setScene(logged);
+        
+        logout.setOnAction(e -> {
+            primary.setScene(loginScene);
+        });
+    }
+    
+    public HBox time(int time){
+        Label l = new Label((time-1) + " - " + time);
+        Region space = new Region();
+        HBox.setHgrow(space, Priority.ALWAYS);
+        Button b = new Button("varaa");
+        
+        b.setOnAction(e -> {
+            l.setTextFill(RED);
+            list.varaa(time);
+            System.out.println(list.varauksia().toString());
+            renew();
+        });
+        
+        HBox line = new HBox(35);
+        line.setPadding(new Insets(0,5,0,5));
+        line.getChildren().addAll(l, space, b);
+        
+        return line;
+    }
+    
+    public HBox varTime(int time){
+        Label l = new Label((time-1) + " - " + time);
+        l.setTextFill(RED);
+        Region space = new Region();
+        HBox.setHgrow(space, Priority.ALWAYS);
+        Button b = new Button("poista");
+        
+        b.setOnAction(e -> {
+            l.setTextFill(BLACK);
+            list.poistaVaraus(time);
+            renew();
+        });
+        
+        HBox line = new HBox(35);
+        line.setPadding(new Insets(0,5,0,5));
+        line.getChildren().addAll(l, space, b);
+        
+        return line;
+    }
+    
+    public VBox times(){
+        VBox times = new VBox();
+        
+        ArrayList<Integer> varattu = this.list.varauksia();
+        if(varattu.size() == 0){
+            for(int i = 1; i <= 24; i++)
+                times.getChildren().add(time(i));
+            return times;
+        }
+        for(int i = 1; i <= 24; i++){
+            if(varattu.contains(i)){
+                times.getChildren().add(varTime(i));
+            }else{
+                times.getChildren().add(time(i));
+            }
+        }
+        
+        return times;
+    }
     
     @Override
     public void start(Stage primary) {
+        this.primary = primary;
         user = new Kayttaja("Admin");
         
         Label logintext = new Label("Username (use Admin for now)");
         TextField loginfield = new TextField();
-        
         Button login = new Button("Log in");
         Button newuser = new Button("New user");
         
@@ -59,22 +144,35 @@ public class Main extends Application {
         loginall.getChildren().add(loginbox);
         loginall.getChildren().add(loginbuttons);
         
-        loginScene = new Scene(loginall);
+        login.setOnAction(e -> {
+            String s = loginfield.getText();
+            if (user != null) {
+                if (user.getNimi().equals(s)) {
+                    loginfield.setText("");
+                    primary.setScene(logged);
+                }
+            }
+        });
         
         newuser.setOnAction(e-> {
             primary.setScene(createUser);
         });
         
+        loginScene = new Scene(loginall);
+        
+        //      end of 1 scene
+        
+        TextField newuserfield = new TextField();
+        newuserfield.setText(" ");
+        Button done = new Button("done");
+        
         HBox newuserhbox = new HBox();
         newuserhbox.setSpacing(10);
-        TextField newuserfield = new TextField();
-        newuserfield.setText("");
         newuserhbox.getChildren().addAll(new Label(" Username"), newuserfield);
+        
         VBox newuserall = new VBox();
         newuserall.setSpacing(10);
-        Button done = new Button("done");
         newuserall.getChildren().addAll(newuserhbox, done);
-        createUser = new Scene(newuserall);
         
         done.setOnAction(e -> {
             String s = newuserfield.getText();
@@ -82,49 +180,11 @@ public class Main extends Application {
             primary.setScene(loginScene);
         });
         
-        login.setOnAction(e -> {
-            String s = loginfield.getText();
-            if (user != null) {
-                if (user.getNimi().equals(s)) {
-                    primary.setScene(logged);
-                }
-            }
-        });
+        createUser = new Scene(newuserall);
         
-        VBox time = new VBox();
-        time.setSpacing(2);
-        ArrayList<Button> vaarabut = new ArrayList();
-        for (int i = 0; i < 24; i++) {
-            vaarabut.add(new Button("varaa"));
-        }
-        ArrayList<Label> times = new ArrayList();
-        for (int i = 0; i < 24; i++) {
-            times.add(new Label(i + " - " + (i + 1)));
-        }
-        for (int i = 0; i < 24; i++) {
-            vaarabut.get(i).setOnAction(e -> {
-                wdstage.show();
-            });
-            HBox onetime = new HBox();
-            onetime.setSpacing(10);
-            onetime.getChildren().addAll(times.get(i), vaarabut.get(i));
-            time.getChildren().add(onetime);
-        }
+        //      end of 2 scene
         
-        BorderPane wd = new BorderPane();
-        wd.setCenter(new Label("Done!"));
-        welldone = new Scene(wd, 100, 100);
-        wdstage = new Stage();
-        wdstage.setScene(welldone);
-        
-        Button logout = new Button("Log out");
-        time.getChildren().add(logout);
-        logged = new Scene(time, 200, 700);
-        
-        logout.setOnAction(e -> {
-            loginfield.setText("");
-            primary.setScene(loginScene);
-        });
+        renew();
         
         primary.setTitle("TimeApp");
         primary.setScene(loginScene);

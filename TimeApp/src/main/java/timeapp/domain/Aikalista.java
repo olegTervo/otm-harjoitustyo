@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.timeapp;
+package timeapp.domain;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,25 +15,29 @@ import java.util.Map;
  */
 public class Aikalista {
     private Map<Kayttaja, ArrayList<Integer>> list;
+    private Kayttaja user;
     
-    public Aikalista() {
+    public Aikalista(Kayttaja user) {
         this.list = new HashMap();
+        this.user = user;
+        this.list.put(user, new ArrayList());
     }
     
-    public void varaa(Kayttaja k, int time) {
-        this.list.putIfAbsent(k, new ArrayList());
-        this.list.get(k).add(time);
+    public void varaa( int time) {
+//        this.list.putIfAbsent(user, new ArrayList());
+        if(!this.list.get(user).contains(time))
+            this.list.get(user).add(time);
     }
     
-    public void poistaVaraus(Kayttaja k, int time) {
-        if (this.list.containsKey(k)) {
-            if (this.list.get(k).contains(time)) {
-                this.list.get(k).remove(this.list.get(k).indexOf(time));
+    public void poistaVaraus(int time) {
+        if (this.list.containsKey(user)) {
+            if (this.list.get(user).contains(time)) {
+                this.list.get(user).remove(this.list.get(user).indexOf(time));
             }
         }
     }
     
-    public ArrayList<Integer> varauksia(Kayttaja k) {
-        return this.list.get(k);
+    public ArrayList<Integer> varauksia() {
+        return this.list.get(user);
     }
 }
