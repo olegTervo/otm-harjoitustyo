@@ -28,7 +28,7 @@ public class TimeAppTest {
     @Before
     public void setUp() {
         user = new Kayttaja("User");
-        list = new Aikalista();
+        list = new Aikalista(user);
     }
     
     @After
@@ -48,16 +48,16 @@ public class TimeAppTest {
     
     @Test
     public void varaustest(){
-        list.varaa(user, 6);
-        assertTrue(list.varauksia(user).get(0) == 6);
+        list.varaa(6);
+        assertTrue(list.varauksia().get(0) == 6);
     }
     
     @Test
     public void poistaminenTest(){
-        list.varaa(user, 1);
-        list.varaa(user, 5);
-        list.poistaVaraus(user, 5);
-        assertEquals(list.varauksia(user).size(), 1);
-        assertTrue(list.varauksia(user).get(0) == 1);
+        list.varaa(1);
+        list.varaa(5);
+        list.poistaVaraus(5);
+        assertEquals(list.varauksia().size(), 1);
+        assertTrue(list.varauksia().get(0) == 1);
     }
 }
