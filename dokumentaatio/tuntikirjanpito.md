@@ -10,3 +10,4 @@
 | 24.4  | 2    | korjan kayttaja ja aikalista |
 | 24.4  | 2    | testaminen, korjauksia |
 | 24.4  | 2    | dokumentaatio, release |
+| yht   | 24   |
