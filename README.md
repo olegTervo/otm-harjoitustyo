@@ -42,7 +42,7 @@ mvn package
 
 generoi hakemistoon _target_ suoritettavan jar-tiedoston _TimeApp-1.0-SNAPSHOT.jar_
 
-## Checkstyle
+### Checkstyle
 
 Tiedostoon [checkstyle.xml](https://github.com/olegTervo/otm-harjoitustyo/blob/master/TimeApp/checkstyle.xml) määrittelemät tarkistukset suoritetaan komennolla
 
