@@ -41,17 +41,18 @@ public class Main extends Application {
     private Scene welldone;
     
     private ScrollPane finaltime;
-    private Kayttaja user;
-    private Aikalista list = new Aikalista(user);
+    private ArrayList<Kayttaja> users = new ArrayList();
+    private Aikalista list = new Aikalista();
     
     public void renew(){
+        VBox boksi = new VBox();
         VBox time1 = times();
         time1.setSpacing(2);
         Button logout = new Button("Log out");
-        time1.getChildren().add(logout);
+        boksi.getChildren().add(logout);
         finaltime = new ScrollPane(time1);    
-        
-        logged = new Scene(finaltime, 200, 300);
+        boksi.getChildren().add(finaltime);
+        logged = new Scene(boksi, 200, 300);
         primary.setScene(logged);
         
         logout.setOnAction(e -> {
@@ -79,7 +80,7 @@ public class Main extends Application {
         return line;
     }
     
-    public HBox varTime(int time){
+    public HBox varTime(int time, boolean yours){
         Label l = new Label((time-1) + " - " + time);
         l.setTextFill(RED);
         Region space = new Region();
@@ -93,9 +94,11 @@ public class Main extends Application {
         });
         
         HBox line = new HBox(35);
+        line.setPrefHeight(25);
         line.setPadding(new Insets(0,5,0,5));
-        line.getChildren().addAll(l, space, b);
-        
+        if(yours)
+            line.getChildren().addAll(l, space, b);
+        else line.getChildren().add(l);
         return line;
     }
     
@@ -103,17 +106,21 @@ public class Main extends Application {
         VBox times = new VBox();
         
         ArrayList<Integer> varattu = this.list.varauksia();
-        if(varattu.size() == 0){
+        ArrayList<Integer> varattuAll = this.list.kaikki();
+        if(varattuAll.size() == 0){
             for(int i = 1; i <= 24; i++)
                 times.getChildren().add(time(i));
             return times;
-        }
+        }else{
         for(int i = 1; i <= 24; i++){
-            if(varattu.contains(i)){
-                times.getChildren().add(varTime(i));
+            if(varattuAll.contains(i)){
+                if(varattu.contains(i)){
+                    times.getChildren().add(varTime(i, true));
+                }else times.getChildren().add(varTime(i, false));
             }else{
                 times.getChildren().add(time(i));
             }
+        }
         }
         
         return times;
@@ -122,7 +129,6 @@ public class Main extends Application {
     @Override
     public void start(Stage primary) {
         this.primary = primary;
-        user = new Kayttaja("Admin");
         
         Label logintext = new Label("Username (use Admin for now)");
         TextField loginfield = new TextField();
@@ -146,16 +152,18 @@ public class Main extends Application {
         
         login.setOnAction(e -> {
             String s = loginfield.getText();
-            if (user != null) {
-                if (user.getNimi().equals(s)) {
+            if (!users.isEmpty()) {
+                if (users.contains(new Kayttaja(s))) {
                     loginfield.setText("");
-                    primary.setScene(logged);
+                    this.list.vaihtaKayttaja(new Kayttaja(s));
+                    renew();
                 }
             }
         });
         
         newuser.setOnAction(e-> {
             primary.setScene(createUser);
+            loginfield.setText("");
         });
         
         loginScene = new Scene(loginall);
@@ -163,8 +171,9 @@ public class Main extends Application {
         //      end of 1 scene
         
         TextField newuserfield = new TextField();
-        newuserfield.setText(" ");
+        newuserfield.setText("");
         Button done = new Button("done");
+        Label vaarin = new Label("");
         
         HBox newuserhbox = new HBox();
         newuserhbox.setSpacing(10);
@@ -172,12 +181,17 @@ public class Main extends Application {
         
         VBox newuserall = new VBox();
         newuserall.setSpacing(10);
-        newuserall.getChildren().addAll(newuserhbox, done);
+        newuserall.getChildren().addAll(vaarin, newuserhbox, done);
         
         done.setOnAction(e -> {
             String s = newuserfield.getText();
-            user = new Kayttaja(s);
-            primary.setScene(loginScene);
+            if(users.contains(new Kayttaja(s))) {
+                vaarin.setText("Nimi pitäisi olla uniikki!");
+            }else{
+                users.add(new Kayttaja(s));
+                primary.setScene(loginScene);
+                newuserfield.setText("");
+            }
         });
         
         createUser = new Scene(newuserall);
@@ -185,6 +199,8 @@ public class Main extends Application {
         //      end of 2 scene
         
         renew();
+        
+        //      end of main scene
         
         primary.setTitle("TimeApp");
         primary.setScene(loginScene);
@@ -195,25 +211,6 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-        
-        /*Scanner lukija = new Scanner(System.in);
-        
-        Kayttaja user = new Kayttaja("Usver");
-        Aikalista l = new Aikalista();
-        while(true){
-            System.out.println("Select time (1-24) :");
-            int time = Integer.parseInt(lukija.nextLine());
-            l.varaa(user, time);
-            ArrayList<Integer> varauksia = l.varauksia(user);
-            System.out.println("Sinun varauksia ovat nyt:");
-            for(int i = 0; i < varauksia.size(); i++){
-                System.out.println((varauksia.get(i) - 1) + "-" + varauksia.get(i));
-            }
-            System.out.println("Haluatko varaa vielä? (Y/N)");
-            if(!lukija.nextLine().equals("Y")){
-                break;
-            }
-        }*/
     }
     
 }

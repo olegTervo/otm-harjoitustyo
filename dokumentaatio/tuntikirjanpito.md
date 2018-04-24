@@ -7,3 +7,6 @@
 | 17.4  | 5    | UI|
 | 17.4  | 3    | testit, virheet, checkstyle |
 | 23.4  | 5    | UI logikka, ulkonäkö |
+| 24.4  | 2    | korjan kayttaja ja aikalista |
+| 24.4  | 2    | testaminen, korjauksia |
+| 24.4  | 2    | dokumentaatio, release |

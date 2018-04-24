@@ -14,11 +14,9 @@ import java.util.List;
  */
 public class Kayttaja {
     private String nimi;
-    private List<Integer> varaukset;
     
     public Kayttaja(String nimi) {
         this.nimi = nimi;
-        this.varaukset = new ArrayList();
     }
     
     public String getNimi() {
@@ -27,5 +25,21 @@ public class Kayttaja {
     
     public int hashCode() {
         return this.nimi.hashCode();
+    }
+    
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        try {
+            Kayttaja k = (Kayttaja) o;
+        } catch (Exception e) {
+            return false;
+        }
+        Kayttaja k = (Kayttaja) o;
+        if (this.hashCode() == k.hashCode()) {
+            return true;
+        }
+        return false;
     }
 }
