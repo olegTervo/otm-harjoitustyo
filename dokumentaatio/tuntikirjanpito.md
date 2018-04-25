@@ -11,4 +11,4 @@
 | 24.4  | 2    | testaminen, korjauksia |
 | 24.4  | 2    | dokumentaatio, release |
 | 25.4  | 6    | tietokannan luominen |
-| yht   | 29   |
+| yht   | 30   |
