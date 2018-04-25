@@ -42,4 +42,8 @@ public class Kayttaja {
         }
         return false;
     }
+    
+    public String toString() {
+        return this.nimi;
+    }
 }

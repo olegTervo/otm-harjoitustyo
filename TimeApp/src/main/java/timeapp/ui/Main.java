@@ -5,9 +5,13 @@
  */
 package timeapp.ui;
 
+import java.sql.SQLException;
 import timeapp.domain.Kayttaja;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -25,6 +29,8 @@ import javafx.scene.paint.Color;
 import static javafx.scene.paint.Color.BLACK;
 import static javafx.scene.paint.Color.RED;
 import javafx.stage.Stage;
+import timeapp.dao.AikalistaDao;
+import timeapp.dao.Database;
 import timeapp.domain.Aikalista;
 
 /**
@@ -41,9 +47,11 @@ public class Main extends Application {
     private Scene welldone;
     
     private ScrollPane finaltime;
-    private ArrayList<Kayttaja> users = new ArrayList();
-    private Aikalista list = new Aikalista();
+    private List<Kayttaja> users = new ArrayList();
+    private Aikalista list;// = new Aikalista();
     
+    Database db;
+    AikalistaDao dao;
     public void renew(){
         VBox boksi = new VBox();
         VBox time1 = times();
@@ -69,6 +77,11 @@ public class Main extends Application {
         b.setOnAction(e -> {
             l.setTextFill(RED);
             list.varaa(time);
+            try {
+                dao.saveOrUpdate(list.getUser().toString(), time);
+            } catch (SQLException ex) {
+                System.out.println("Can not get user");
+            }
             System.out.println(list.varauksia().toString());
             renew();
         });
@@ -88,6 +101,11 @@ public class Main extends Application {
         Button b = new Button("poista");
         
         b.setOnAction(e -> {
+            try {
+                dao.delete(time);
+            } catch (SQLException ex) {
+                System.out.println("Can not delete time");
+            }
             l.setTextFill(BLACK);
             list.poistaVaraus(time);
             renew();
@@ -114,9 +132,11 @@ public class Main extends Application {
         }else{
         for(int i = 1; i <= 24; i++){
             if(varattuAll.contains(i)){
-                if(varattu.contains(i)){
-                    times.getChildren().add(varTime(i, true));
-                }else times.getChildren().add(varTime(i, false));
+                if(list.getUser() != null){
+                    if(varattu.contains(i)){
+                        times.getChildren().add(varTime(i, true));
+                    }else times.getChildren().add(varTime(i, false));
+                }
             }else{
                 times.getChildren().add(time(i));
             }
@@ -127,10 +147,18 @@ public class Main extends Application {
     }
     
     @Override
-    public void start(Stage primary) {
+    public void start(Stage primary) throws Exception {
+        db = new Database("jdbc:sqlite:list.db");
+        dao = new AikalistaDao(db);
+        List<String> usrs = dao.findAll();
+        for(int i = 0; i < usrs.size(); i++){
+            this.users.add(new Kayttaja(usrs.get(i)));
+        }
+        this.list = new Aikalista(dao.varaukset());
         this.primary = primary;
         
-        Label logintext = new Label("Username (use Admin for now)");
+        Label vaarinLogin = new Label("");
+        Label logintext = new Label("Username");
         TextField loginfield = new TextField();
         Button login = new Button("Log in");
         Button newuser = new Button("New user");
@@ -147,6 +175,7 @@ public class Main extends Application {
         
         VBox loginall = new VBox();
         loginall.setSpacing(10);
+        loginall.getChildren().add(vaarinLogin);
         loginall.getChildren().add(loginbox);
         loginall.getChildren().add(loginbuttons);
         
@@ -154,16 +183,16 @@ public class Main extends Application {
             String s = loginfield.getText();
             if (!users.isEmpty()) {
                 if (users.contains(new Kayttaja(s))) {
+                    vaarinLogin.setText("");
                     loginfield.setText("");
                     this.list.vaihtaKayttaja(new Kayttaja(s));
                     renew();
-                }
-            }
+                }else vaarinLogin.setText("Tarkista käyttäjatunnus");
+            }else vaarinLogin.setText("Paina new user");
         });
         
         newuser.setOnAction(e-> {
             primary.setScene(createUser);
-            loginfield.setText("");
         });
         
         loginScene = new Scene(loginall);
@@ -188,8 +217,15 @@ public class Main extends Application {
             if(users.contains(new Kayttaja(s))) {
                 vaarin.setText("Nimi pitäisi olla uniikki!");
             }else{
+                try {
+                    dao.souser(s);
+                } catch (SQLException ex) {
+                    System.out.println("Can not add user");
+                }
                 users.add(new Kayttaja(s));
+                vaarin.setText("");
                 primary.setScene(loginScene);
+                loginfield.setText("");
                 newuserfield.setText("");
             }
         });

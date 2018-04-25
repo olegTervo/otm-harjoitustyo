@@ -23,6 +23,10 @@ public class Aikalista {
         this.list.putIfAbsent(user, new ArrayList());
     }
     
+    public Aikalista(HashMap<Kayttaja, ArrayList<Integer>> list) {
+        this.list = list;
+    }
+    
     public void vaihtaKayttaja(Kayttaja user) {
         this.user = user;
         this.list.putIfAbsent(user, new ArrayList());
@@ -55,5 +59,9 @@ public class Aikalista {
             }
         });
         return kaikki;
+    }
+    
+    public Kayttaja getUser() {
+        return this.user;
     }
 }
