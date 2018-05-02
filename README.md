@@ -12,7 +12,7 @@ Sovellus on järjestelmä, joka hoitaa ajanvarauksia. Siellä voi rikestroida, v
 
 ## Released
 
-[release v1.0]( https://github.com/olegTervo/otm-harjoitustyo/releases/tag/release )
+[release v1.1]( https://github.com/olegTervo/otm-harjoitustyo/releases/tag/v1.1 )
 
 ## Komentorivitoiminnot
 
