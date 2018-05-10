@@ -28,6 +28,5 @@ Sovelluksessa on yksi käyttäjärooli tässä vaiheessa.
 - Lisää pääkäyttäja
 - Rajoita varauslista, esimerkiksi 7:00 - 21:00
 - Lisää komennot varaukseen
-- Tallenna kaikki varaukset, että voi tarkistaa, kenen varaus oli
 - Tallenna tilaston käyttämisesta
 
