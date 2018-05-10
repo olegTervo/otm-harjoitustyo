@@ -6,13 +6,15 @@ Sovellus on järjestelmä, joka hoitaa ajanvarauksia. Siellä voi rikestroida, v
 
 [Vaatimusmaarittely]( https://github.com/olegTervo/otm-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md )
 
-[Työaikakirjanpito]( https://github.com/olegTervo/otm-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md )
+[Käyttöohje](https://github.com/olegTervo/otm-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
 
 [Arkkitehtuurikuvaus]( https://github.com/olegTervo/otm-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md )
 
+[Työaikakirjanpito]( https://github.com/olegTervo/otm-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md )
+
 ## Released
 
-[release v1.1]( https://github.com/olegTervo/otm-harjoitustyo/releases/tag/v1.1 )
+[release v1.2]( https://github.com/olegTervo/otm-harjoitustyo/releases/tag/v1.2 )
 
 ## Komentorivitoiminnot
 
@@ -41,6 +43,16 @@ mvn package
 ```
 
 generoi hakemistoon _target_ suoritettavan jar-tiedoston _TimeApp-1.0-SNAPSHOT.jar_
+
+### JavaDoc
+
+JavaDoc generoidaan komennolla
+
+```
+mvn javadoc:javadoc
+```
+
+JavaDocia voi tarkastella avaamalla selaimella tiedosto _target/site/apidocs/index.html_
 
 ### Checkstyle
 
