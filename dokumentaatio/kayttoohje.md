@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Lataa [TimeApp.jar](https://github.com/olegTervo/otm-harjoitustyo/releases/tag/v1.1) ja [list.db](https://github.com/olegTervo/otm-harjoitustyo/releases/tag/v1.1)
+Lataa [TimeApp.jar](https://github.com/olegTervo/otm-harjoitustyo/releases/tag/v1.2) ja [list.db](https://github.com/olegTervo/otm-harjoitustyo/releases/tag/v1.2)
 
 ## Konfigurointi
 
