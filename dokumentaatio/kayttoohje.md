@@ -11,7 +11,7 @@ Ohjelma käyttää list.db tietokantaa tietojen tallentamiseen. Tietokanta pitä
 Ohjelma käynnistetään komennolla 
 
 ```
-java -jar todoapp.jar
+java -jar TimeApp.jar
 ```
 
 ## Uuden käyttäjän luominen
