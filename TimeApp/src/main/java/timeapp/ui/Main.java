@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package timeapp.ui;
 
 import java.sql.SQLException;
 import timeapp.domain.Kayttaja;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -19,13 +11,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import static javafx.scene.paint.Color.BLACK;
 import static javafx.scene.paint.Color.RED;
 import javafx.stage.Stage;
@@ -36,6 +25,7 @@ import timeapp.domain.Aikalista;
 /**
  *
  * @author oleg
+ * main luokka, jossa on koko käyttöliittymän koodi
  */
 public class Main extends Application {
     
@@ -52,6 +42,10 @@ public class Main extends Application {
     
     Database db;
     AikalistaDao dao;
+    
+    /**
+     * metodi uudista aikataulu
+     */
     public void renew(){
         VBox boksi = new VBox();
         VBox time1 = times();
@@ -67,7 +61,11 @@ public class Main extends Application {
             primary.setScene(loginScene);
         });
     }
-    
+    /**
+     * metodi luoda linjan, jossa aika ei ole varattu
+     * @param time aika
+     * @return yhden tunnin linja aikataulussa
+     */
     public HBox time(int time){
         Label l = new Label((time-1) + " - " + time);
         Region space = new Region();
@@ -92,6 +90,13 @@ public class Main extends Application {
         
         return line;
     }
+    
+    /**
+     * metodi luoda linjan, jossa aika on varattu
+     * @param time aika
+     * @param yours true jos nykyinen käyttäja vaaraa ajan
+     * @return yhden tunnin linja aikataulussa
+     */
     
     public HBox varTime(int time, boolean yours){
         Label l = new Label((time-1) + " - " + time);
@@ -119,6 +124,11 @@ public class Main extends Application {
         else line.getChildren().add(l);
         return line;
     }
+    
+    /**
+     * metodi yhdistää time ja varTime metodit ja luoda aikataulu
+     * @return 
+     */
     
     public VBox times(){
         VBox times = new VBox();

@@ -1,18 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package timeapp.dao;
 
 import java.sql.*;
 import java.util.*;
-import timeapp.domain.Aikalista;
 import timeapp.domain.Kayttaja;
 
 /**
  *
  * @author oleg
+ * luokka hallinta tietokantaa
  */
 public class AikalistaDao implements Dao<String, Integer> {
     

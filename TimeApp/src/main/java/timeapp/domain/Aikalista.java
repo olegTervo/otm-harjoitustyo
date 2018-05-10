@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package timeapp.domain;
 
 import java.util.ArrayList;
@@ -12,6 +7,9 @@ import java.util.Map;
 /**
  *
  * @author oleg
+ * luokka hallintaa kaikki varauksia
+ * käyttäjä vaihtaa kun joku kiraudu sisään
+ * 
  */
 public class Aikalista {
     private Map<Kayttaja, ArrayList<Integer>> list;
@@ -19,7 +17,6 @@ public class Aikalista {
     
     public Aikalista() {
         this.list = new HashMap();
-//        this.user = user;
         this.list.putIfAbsent(user, new ArrayList());
     }
     
@@ -45,14 +42,19 @@ public class Aikalista {
             }
         }
     }
-    
+    /**
+     * 
+     * @return yhden käyttäjän varauksia
+     */
     public ArrayList<Integer> varauksia() {
         return this.list.get(user);
     }
-    
+    /**
+     * 
+     * @return kaikki varaukset
+     */
     public ArrayList<Integer> kaikki() {
         ArrayList<Integer> kaikki = new ArrayList();
-//        for(int i = 0; i < this.list.size(); i++) {
         this.list.keySet().stream().forEach(k -> {
             for (int j = 0; j < this.list.get(k).size(); j++) {
                 kaikki.add(this.list.get(k).get(j));

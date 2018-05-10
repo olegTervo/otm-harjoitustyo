@@ -12,4 +12,5 @@
 | 24.4  | 2    | dokumentaatio, release |
 | 25.4  | 6    | tietokannan luominen |
 | 2.5   | 2    | arkkitehtuuri |
-| yht   | 32   | 
+| 10.5  | 3    | JavaDoc, kayttoohje, viimeiset korjaukset |
+| yht   | 35   | 
